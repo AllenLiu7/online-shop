@@ -13,11 +13,12 @@ class App extends React.Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        const userRef = await createUserProfileDocument(user);
+        console.log(user);
 
-        //noSnapshot sents back snapshot of the userRef.
+        //onSnapshot sents back snapshot of the userRef.
         userRef.onSnapshot((snapShot) => {
           this.setState(
             {
