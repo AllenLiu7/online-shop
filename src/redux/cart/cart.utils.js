@@ -12,5 +12,9 @@ export const addItemToCart = (cartItems, newItem) => {
   return [...cartItems, { ...newItem, quantity: 1 }];
 };
 
+export const removeItem = (cartItems, itemToRemove) => {
+  return cartItems.filter((cartItem) => cartItem.id !== itemToRemove.id);
+};
+
 //if the new item doesn`t exist, assign the quantity to 1
 //otherwise, quatity + 1

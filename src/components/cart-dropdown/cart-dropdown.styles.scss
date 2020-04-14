@@ -4,6 +4,7 @@
   height: 340px;
   display: flex;
   flex-direction: column;
+
   padding: 20px;
   border: 1px solid black;
   background-color: white;
@@ -16,6 +17,13 @@
     height: 240px;
     display: flex;
     flex-direction: column;
+  }
+
+  .empty-cart {
+    font-size: 18px;
+    position: absolute;
+    top: 100px;
+    margin-left: 15px;
   }
 
   button {

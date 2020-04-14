@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 
 import { auth } from "../../firebase/firebase.utils";
 import { toggleCartHidden } from "../../redux/cart/cart.actions";
+import { selectHiddenStatus } from "../../redux/cart/cart.selectors";
+import { selectCurrentUser } from "../../redux/user/user.seletors";
 
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 import CartIcon from "../cart-icon/cart-icon.component";
@@ -45,8 +47,8 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const mapStateToProps = (state) => ({
-  currentUser: state.user.currentUser,
-  hidden: state.cart.hidden,
+  currentUser: selectCurrentUser(state),
+  hidden: selectHiddenStatus(state),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
