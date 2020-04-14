@@ -20,14 +20,24 @@
   .quantity,
   .price {
     width: 23%;
+    padding-left: 10px;
   }
 
   .quantity {
-    padding-left: 20px;
+    padding-left: 5px;
+
+    .arrow {
+      display: inline-block;
+      cursor: pointer;
+    }
+
+    .value {
+      padding: 0 15px 0 15px;
+    }
   }
 
   .remove-button {
-    padding-left: 12px;
+    padding-left: 23px;
     cursor: pointer;
   }
 }
