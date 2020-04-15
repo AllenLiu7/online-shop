@@ -1,5 +1,5 @@
 const INITIAL_STATE = {
-  items: [
+  collections: [
     {
       id: 1,
       title: "Hats",

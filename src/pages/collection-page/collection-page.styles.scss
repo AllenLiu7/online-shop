@@ -1,0 +1,11 @@
+.collections {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-gap: 50px;
+  padding-top: 100px;
+  padding-left: 80px;
+
+  .collection-item {
+    width: 80%;
+  }
+}

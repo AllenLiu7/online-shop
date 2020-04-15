@@ -1,9 +1,9 @@
 import React from "react";
-import SignInForm from "../sign-in-form/sign-in-form.component";
-import SignUp from "../sign-up/sign-up.component";
+import SignInForm from "../../components/sign-in-form/sign-in-form.component";
+import SignUp from "../../components/sign-up/sign-up.component";
 import "./sign-in&up.styles.scss";
 
-function SignPage(props) {
+function SignPage() {
   return (
     <div className="sign-in-and-sign-up">
       <SignInForm />
