@@ -1,7 +1,7 @@
 {
   "name": "ecommerce_project",
   "engines": {
-    "node": "10.15.1"
+    "node": "12.16.x"
   },
   "version": "0.1.0",
   "private": true,
