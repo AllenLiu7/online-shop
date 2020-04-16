@@ -5,12 +5,15 @@ import CollectionItem from "../../components/collection-item/collection-item.com
 import { selectCollection } from "../../redux/shop-items/shop-item.selectors";
 
 function CollectionPage({ collection }) {
-  const { items } = collection;
+  const { items, title } = collection;
   return (
-    <div className="collections">
-      {items.map((item) => (
-        <CollectionItem className="collections-item" item={item} />
-      ))}
+    <div className="collection-page">
+      <h2 className="title">{title}</h2>
+      <div className="collections">
+        {items.map((item) => (
+          <CollectionItem className="collections-item" item={item} />
+        ))}
+      </div>
     </div>
   );
 }
