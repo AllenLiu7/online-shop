@@ -17,19 +17,20 @@ class App extends React.Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    const { setCurrentUser } = this.props;
+    const { setCurrentUser, collectionsArray } = this.props;
 
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (user) => {
       if (user) {
         const userRef = await createUserProfileDocument(user);
         console.log(user);
 
-        //onSnapshot sents back snapshot of the userRef.
+        //noSnapshot is a listener, when ever snapshot is changed, onSnapShot will run
         userRef.onSnapshot((snapShot) => {
           setCurrentUser(
             {
               currentUser: {
                 id: snapShot.id,
+
                 //.data()will get back properties stored in db
                 ...snapShot.data(),
               },

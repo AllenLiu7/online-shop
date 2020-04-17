@@ -49,6 +49,28 @@ export const createUserProfileDocument = async (user, additionalData) => {
   return userRef;
 };
 
+//a function to transfer data from local to firestore
+export const addCollectionAndDocuments = async (
+  collectionKey,
+  objectsToAdd
+) => {
+  //create reference to a new collection with the name {collectionKey}
+  const collectionRef = firestore.collection(collectionKey);
+  console.log(collectionRef);
+
+  //use batch to finish the whole object, if something wrong in the middle, all objects will not be set.
+  const batch = firestore.batch();
+  objectsToAdd.forEach((obj) => {
+    //create empty docRef for each objects with unique id
+    const newDocRef = collectionRef.doc();
+    console.log(newDocRef);
+    //originally can be newDocRef.set(obj), but here we use batch.
+    batch.set(newDocRef, obj);
+  });
+
+  return await batch.commit();
+};
+
 //export these const for usage elsewhere
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
