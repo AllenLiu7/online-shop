@@ -71,6 +71,29 @@ export const addCollectionAndDocuments = async (
   return await batch.commit();
 };
 
+//function to get data from the collections snapshot
+export const convertCollectionsSnapshotToMap = (collectionsSnapshot) => {
+  const transforedCollection = collectionsSnapshot.docs.map((doc) => {
+    const { title, items } = doc.data();
+
+    return {
+      //to add a routeName property that the origin doesn`t have
+      routeName: encodeURI(title.toLowerCase()),
+      //id we need is store in docs property not in the document snapshot
+      id: doc.id,
+      title,
+      items,
+    };
+  });
+
+  //change the data sturcture from array to hash table
+  return transforedCollection.reduce((accumulator, collection) => {
+    accumulator[collection.title.toLowerCase()] = collection;
+
+    return accumulator;
+  }, {});
+};
+
 //export these const for usage elsewhere
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();

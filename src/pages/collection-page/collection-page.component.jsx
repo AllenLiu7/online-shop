@@ -11,7 +11,11 @@ function CollectionPage({ collection }) {
       <h2 className="title">{title}</h2>
       <div className="collections">
         {items.map((item) => (
-          <CollectionItem className="collections-item" item={item} />
+          <CollectionItem
+            className="collections-item"
+            key={item.id}
+            item={item}
+          />
         ))}
       </div>
     </div>
