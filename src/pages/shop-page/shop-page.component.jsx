@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { fetchCollectionsStartAsync } from "../../redux/shop-items/shop-item.actions";
+import { fetchCollectionsStart } from "../../redux/shop-items/shop-item.actions";
 import {
   selectIsCollectionFetching,
   selectIsCollectionsLoaded,
@@ -16,8 +16,12 @@ const CollectionsOverviewWithSpinner = WithSpinner(CollectionOverview);
 const CollectionPageWithSpinner = WithSpinner(CollectionPage);
 
 class ShopPage extends Component {
+  //putting fetch action in componentDidmount() will not pass down the fetched data when the site first render. Collections will be null.
+  // so we add a spinner HOC to stop the rendering to wait for the fetching data.
+  // if the data(object) exsist, we skip the spinner.
+
   componentDidMount() {
-    this.props.fetchCollectionsStartAsync();
+    this.props.fetchCollectionsStart();
   }
 
   render() {
@@ -53,7 +57,7 @@ class ShopPage extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchCollectionsStartAsync: () => dispatch(fetchCollectionsStartAsync()),
+  fetchCollectionsStart: () => dispatch(fetchCollectionsStart()),
 });
 
 const mapStateToProps = (state) => ({

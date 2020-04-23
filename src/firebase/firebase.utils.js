@@ -73,7 +73,7 @@ export const addCollectionAndDocuments = async (
 
 //function to get data from the collections snapshot
 export const convertCollectionsSnapshotToMap = (collectionsSnapshot) => {
-  const transforedCollection = collectionsSnapshot.docs.map((doc) => {
+  const transformedCollection = collectionsSnapshot.docs.map((doc) => {
     const { title, items } = doc.data();
 
     return {
@@ -87,7 +87,7 @@ export const convertCollectionsSnapshotToMap = (collectionsSnapshot) => {
   });
 
   //change the data sturcture from array to hash table
-  return transforedCollection.reduce((accumulator, collection) => {
+  return transformedCollection.reduce((accumulator, collection) => {
     accumulator[collection.title.toLowerCase()] = collection;
 
     return accumulator;

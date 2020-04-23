@@ -26,5 +26,5 @@ export const selectIsCollectionFetching = createSelector(
 
 export const selectIsCollectionsLoaded = createSelector(
   [selectShop],
-  (shop) => !!shop.collections
+  (shop) => !!shop.collections //return true if there is an object even empty, otherwise return false
 );

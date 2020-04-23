@@ -19,12 +19,16 @@ class App extends React.Component {
   componentDidMount() {
     const { setCurrentUser } = this.props;
 
+    //Every time there is a  user sign in, onAuthStateChanged will return "user" contains user detail
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (user) => {
       if (user) {
+        //If the user dosen't exist, createUserProfileDocument will create a profile for this user (from google), so that this user will have a UID which is used for session
+        //If the user exist, this function will be passed
         const userRef = await createUserProfileDocument(user);
         console.log(user);
+        console.log(userRef);
 
-        //noSnapshot is a listener, when ever snapshot is changed, onSnapShot will run
+        //noSnapshot is a listener, when ever snapshot is changed, onSnapShot will send back the changed snapshot, here the change could be the signed in time.
         userRef.onSnapshot((snapShot) => {
           setCurrentUser(
             {
@@ -41,6 +45,7 @@ class App extends React.Component {
           );
         });
       } else {
+        //if no one signed in, the user = null.
         setCurrentUser(user);
       }
     });
