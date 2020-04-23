@@ -53,7 +53,7 @@ class SignInForm extends Component {
           <div className="buttons">
             <CustomButton type="summit">Sign In</CustomButton>
             <CustomButton
-              type="summit"
+              type="button"
               onClick={signInWithGoogle}
               isGoogleSignIn
             >
