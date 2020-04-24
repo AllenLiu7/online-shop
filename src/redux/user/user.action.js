@@ -14,7 +14,7 @@ export const signInFailure = (error) => ({
   payload: error,
 });
 
-export const emailSignInStart = (emailAndPassword) => ({
+export const emailSignInStart = (emailandpassword) => ({
   type: UserActionTypes.EMAIL_SIGN_IN_START,
-  payload: emailAndPassword,
+  payload: { emailandpassword },
 });

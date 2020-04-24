@@ -5,7 +5,10 @@ import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
 
 import { auth } from "../../firebase/firebase.utils";
-import { googleSignInStart } from "../../redux/user/user.action";
+import {
+  googleSignInStart,
+  emailSignInStart,
+} from "../../redux/user/user.action";
 
 import "./sign-in-form.styles.scss";
 
@@ -14,16 +17,17 @@ class SignInForm extends Component {
 
   handleSummit = async (event) => {
     event.preventDefault();
-
+    const { emailSignInStart } = this.props;
     const { email, password } = this.state;
 
-    try {
-      await auth.signInWithEmailAndPassword(email, password);
-    } catch (error) {
-      console.error(error);
-    }
-
-    this.setState({ email: "", password: "" });
+    emailSignInStart(email, password); // how these two variable passed to payload is confusing!!!!!!!!!
+    // try {
+    //   await auth.signInWithEmailAndPassword(email, password);
+    // } catch (error) {
+    //   console.error(error);
+    // }
+    // no more setState, Redux will handle all the setState.
+    //this.setState({ email: "", password: "" });
   };
 
   handleChange = (event) => {
@@ -73,6 +77,7 @@ class SignInForm extends Component {
 
 const mapDispatchToProps = (dispatch) => ({
   googleSignInStart: () => dispatch(googleSignInStart()),
+  emailSignInStart: () => dispatch(emailSignInStart()),
 });
 
 export default connect(null, mapDispatchToProps)(SignInForm);
