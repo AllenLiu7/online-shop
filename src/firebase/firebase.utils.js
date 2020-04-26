@@ -85,13 +85,22 @@ export const convertCollectionsSnapshotToMap = (collectionsSnapshot) => {
       items,
     };
   });
-
   //change the data sturcture from array to hash table
   return transformedCollection.reduce((accumulator, collection) => {
     accumulator[collection.title.toLowerCase()] = collection;
 
     return accumulator;
   }, {});
+};
+
+//function to get the current user
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = auth.onAuthStateChanged((userAuth) => {
+      unsubscribe();
+      resolve(userAuth);
+    }, reject);
+  });
 };
 
 //export these const for usage elsewhere

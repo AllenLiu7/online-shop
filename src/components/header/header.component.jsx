@@ -2,8 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { auth } from "../../firebase/firebase.utils";
 import { toggleCartHidden } from "../../redux/cart/cart.actions";
+import { signOutStart } from "../../redux/user/user.action";
 import { selectHiddenStatus } from "../../redux/cart/cart.selectors";
 import { selectCurrentUser } from "../../redux/user/user.seletors";
 
@@ -12,7 +12,7 @@ import CartIcon from "../cart-icon/cart-icon.component";
 import CartDropdown from "../cart-dropdown/cart-dropdown.component";
 import "./header.styles.scss";
 
-const Header = ({ currentUser, hidden, toggleCartHidden }) => (
+const Header = ({ currentUser, hidden, toggleCartHidden, signOutStart }) => (
   <div className="header">
     <Link className="logo-container" to="/">
       <Logo className="logo" />
@@ -25,12 +25,7 @@ const Header = ({ currentUser, hidden, toggleCartHidden }) => (
         CONTACT
       </Link>
       {currentUser ? (
-        <div
-          className="option"
-          onClick={() => {
-            auth.signOut();
-          }}
-        >
+        <div className="option" onClick={signOutStart}>
           SIGN OUT
         </div>
       ) : (
@@ -44,6 +39,7 @@ const Header = ({ currentUser, hidden, toggleCartHidden }) => (
 
 const mapDispatchToProps = (dispatch) => ({
   toggleCartHidden: () => dispatch(toggleCartHidden()),
+  signOutStart: () => dispatch(signOutStart()),
 });
 
 const mapStateToProps = (state) => ({
