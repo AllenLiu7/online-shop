@@ -7,8 +7,8 @@ import {
 
 import UserActionTypes from "./user.types";
 import {
-  googleSignInStart,
-  emailSignInStart,
+  signUpSuccess,
+  signUpFailure,
   signInSuccess,
   signInFailure,
   signOutSuccess,
@@ -16,10 +16,14 @@ import {
 } from "./user.action";
 
 //logic in google and email sign in
-export function* getSnapshotFromUserAuth(userAuth) {
+export function* getSnapshotFromUserAuth(userAuth, additionalData) {
   try {
     //user.uid is what we need to get the userRef
-    const userRef = yield call(createUserProfileDocument, userAuth);
+    const userRef = yield call(
+      createUserProfileDocument,
+      userAuth,
+      additionalData
+    );
     const userSnapshot = yield userRef.get();
     //.data() to get the actuan properites on the user
     yield put(signInSuccess({ id: userSnapshot.id, ...userSnapshot.data() }));
@@ -47,6 +51,19 @@ export function* emailSignInAsync({ payload: { email, password } }) {
   } catch (error) {
     yield put(signInFailure(error));
   }
+}
+
+export function* signUpAsync({ payload: { email, password, displayName } }) {
+  try {
+    const { user } = yield auth.createUserWithEmailAndPassword(email, password);
+    yield put(signUpSuccess({ user, additionalData: { displayName } }));
+  } catch (error) {
+    yield put(signUpFailure(error));
+  }
+}
+
+export function* signInAferSignUp({ payload: { user, additionalData } }) {
+  yield getSnapshotFromUserAuth(user, additionalData);
 }
 
 //used in app.js to check if there is a user sign in in google, if it does, google will return a user object
@@ -77,6 +94,14 @@ export function* onEmailSignInStart() {
   yield takeLatest(UserActionTypes.EMAIL_SIGN_IN_START, emailSignInAsync);
 }
 
+export function* onSignUpStart() {
+  yield takeLatest(UserActionTypes.SIGN_UP_START, signUpAsync);
+}
+
+export function* onSignUpSuccess() {
+  yield takeLatest(UserActionTypes.SIGN_UP_SUCCESS, signInAferSignUp);
+}
+
 export function* onCheckUserSession() {
   yield takeLatest(UserActionTypes.CHECK_USER_SESSION, isUserAuthenticated);
 }
@@ -89,7 +114,9 @@ export function* userSagas() {
   yield all([
     call(onGoogleSignInStart),
     call(onEmailSignInStart),
-    call(isUserAuthenticated),
+    call(onSignUpStart),
+    call(onCheckUserSession),
     call(onSignOutStart),
+    call(onSignUpSuccess),
   ]);
 }
