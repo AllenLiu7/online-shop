@@ -1,23 +1,23 @@
 // Firebase App (the core Firebase SDK) is always required and must be listed first
-import firebase from "firebase/app";
+import firebase from 'firebase/app';
 
 // If you enabled Analytics in your project, add the Firebase SDK for Analytics
-import "firebase/analytics";
+import 'firebase/analytics';
 
 // Add the Firebase products that you want to use
-import "firebase/auth";
-import "firebase/firestore";
+import 'firebase/auth';
+import 'firebase/firestore';
 
 // TODO: Replace the following with your app's Firebase project configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBUbkrY_TDXhlq7jtY_WLs6MHqvKKJz0zU",
-  authDomain: "cloth-commerce.firebaseapp.com",
-  databaseURL: "https://cloth-commerce.firebaseio.com",
-  projectId: "cloth-commerce",
-  storageBucket: "cloth-commerce.appspot.com",
-  messagingSenderId: "230557840593",
-  appId: "1:230557840593:web:643ef4e058de9d698b01f0",
-  measurementId: "G-P95CFTJ8NF",
+  apiKey: 'AIzaSyBUbkrY_TDXhlq7jtY_WLs6MHqvKKJz0zU',
+  authDomain: 'cloth-commerce.firebaseapp.com',
+  databaseURL: 'https://cloth-commerce.firebaseio.com',
+  projectId: 'cloth-commerce',
+  storageBucket: 'cloth-commerce.appspot.com',
+  messagingSenderId: '230557840593',
+  appId: '1:230557840593:web:643ef4e058de9d698b01f0',
+  measurementId: 'G-P95CFTJ8NF',
 };
 
 // Initialize Firebase
@@ -42,7 +42,7 @@ export const createUserProfileDocument = async (user, additionalData) => {
         ...additionalData,
       });
     } catch (error) {
-      console.log("error creating user", error.message);
+      console.log('error creating user', error.message);
     }
   }
 
@@ -111,7 +111,7 @@ export const firestore = firebase.firestore();
 export const googleProvider = new firebase.auth.GoogleAuthProvider();
 
 googleProvider.setCustomParameters({
-  prompt: "select_account",
+  prompt: 'select_account',
 });
 
 export const signInWithGoogle = () => auth.signInWithPopup(googleProvider);
