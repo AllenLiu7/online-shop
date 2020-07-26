@@ -23,6 +23,8 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
+//this function will be used in the saga. "user" is the payload from the action.
+//the action is trigger by googleSignInAsync. Payload is from the google button action
 export const createUserProfileDocument = async (user, additionalData) => {
   if (!user) return;
 

@@ -1,11 +1,11 @@
-import { call, takeLatest, all, put } from "redux-saga/effects";
-import { auth, googleProvider } from "../../firebase/firebase.utils";
+import { call, takeLatest, all, put } from 'redux-saga/effects';
+import { auth, googleProvider } from '../../firebase/firebase.utils';
 import {
   createUserProfileDocument,
   getCurrentUser,
-} from "../../firebase/firebase.utils";
+} from '../../firebase/firebase.utils';
 
-import UserActionTypes from "./user.types";
+import UserActionTypes from './user.types';
 import {
   signUpSuccess,
   signUpFailure,
@@ -13,7 +13,7 @@ import {
   signInFailure,
   signOutSuccess,
   signOutFailure,
-} from "./user.action";
+} from './user.action';
 
 //logic in google and email sign in
 export function* getSnapshotFromUserAuth(user, additionalData) {
@@ -30,7 +30,7 @@ export function* getSnapshotFromUserAuth(user, additionalData) {
 
 export function* googleSignInAsync() {
   try {
-    //user is one of the properties of the rerurned object
+    //user is one of the properties of the rerurned object from the google oauth
     const { user } = yield auth.signInWithPopup(googleProvider);
     yield getSnapshotFromUserAuth(user);
   } catch (error) {
@@ -42,6 +42,8 @@ export function* googleSignInAsync() {
 export function* emailSignInAsync({ payload: { email, password } }) {
   try {
     //almost the same logic as the googlesignin
+    //we should allow the email password sign in google auth setting
+    //user data will be automatically store in the firestore.
     const { user } = yield auth.signInWithEmailAndPassword(email, password);
     yield getSnapshotFromUserAuth(user);
   } catch (error) {
