@@ -20,7 +20,7 @@ const INITIAL_STATE = {
     },
     {
       title: "womens",
-      imageUrl: "https://images.unsplash.com/photo-1500522144261-ea64433bbe27?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1502&q=80",
+      imageUrl: "https://images.unsplash.com/photo-1529939620248-273fd31a7cdf?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1488&q=80",
       size: "large",
       id: 4,
       linkUrl: "shop/womens",
