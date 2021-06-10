@@ -1,17 +1,16 @@
-import React from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
-import { connect } from "react-redux";
-
 import "./App.css";
 
-import { selectCurrentUser } from "./redux/user/user.seletors";
-import { checkUserSession } from "./redux/user/user.action";
+import { Redirect, Route, Switch } from "react-router-dom";
 
-import HomePage from "./pages/home-page/homepage.component";
 import CheckoutPage from "./pages/checkout-page/checkout-page.component";
-import ShopPage from "./pages/shop-page/shop-page.component";
 import Header from "./components/header/header.component";
+import HomePage from "./pages/home-page/homepage.component";
+import React from "react";
+import ShopPage from "./pages/shop-page/shop-page.component";
 import SignPage from "./pages/sign-in&up-page/sign-in&up-page.component";
+import { checkUserSession } from "./redux/user/user.action";
+import { connect } from "react-redux";
+import { selectCurrentUser } from "./redux/user/user.seletors";
 
 class App extends React.Component {
   // unsubscribeFromAuth = null;

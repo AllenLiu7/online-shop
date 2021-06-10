@@ -1,8 +1,8 @@
-import { cartActionTypes } from "./cart.types";
 import { addItemToCart } from "./cart.utils";
-import { removeItem } from "./cart.utils";
-import { increaseItem } from "./cart.utils";
+import { cartActionTypes } from "./cart.types";
 import { decreaseItem } from "./cart.utils";
+import { increaseItem } from "./cart.utils";
+import { removeItem } from "./cart.utils";
 
 const INITIAL_STATE = {
   hidden: true,
