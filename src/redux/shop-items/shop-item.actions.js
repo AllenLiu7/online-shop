@@ -1,9 +1,4 @@
-import { shopItemActionTypes } from "./shop-item.types";
-
-import {
-  firestore,
-  convertCollectionsSnapshotToMap,
-} from "../../firebase/firebase.utils";
+import { shopItemActionTypes } from './shop-item.types';
 
 export const fetchCollectionsStart = () => ({
   type: shopItemActionTypes.FETCH_COLLECTIONS_START,
@@ -19,17 +14,17 @@ export const fetchCollectionsFailure = (errorMessage) => ({
   payload: errorMessage,
 });
 
-export const fetchCollectionsStartAsync = () => {
-  return (dispatch) => {
-    const collectionRef = firestore.collection("collections");
-    dispatch(fetchCollectionsStart());
+// export const fetchCollectionsStartAsync = () => {
+//   return (dispatch) => {
+//     const collectionRef = firestore.collection('collections');
+//     dispatch(fetchCollectionsStart());
 
-    collectionRef
-      .get()
-      .then((snapshot) => {
-        const data = convertCollectionsSnapshotToMap(snapshot);
-        dispatch(fetchCollectionsSuccess(data));
-      })
-      .catch((error) => dispatch(fetchCollectionsFailure(error.message)));
-  };
-};
+//     collectionRef
+//       .get()
+//       .then((snapshot) => {
+//         const data = convertCollectionsSnapshotToMap(snapshot);
+//         dispatch(fetchCollectionsSuccess(data));
+//       })
+//       .catch((error) => dispatch(fetchCollectionsFailure(error.message)));
+//   };
+// };

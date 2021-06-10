@@ -1,11 +1,10 @@
-import { createStore, applyMiddleware } from "redux";
+//import { createStore, applyMiddleware } from "redux";
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 
-import { persistStore } from "redux-persist";
 import logger from "redux-logger";
+import { persistStore } from "redux-persist";
 import createSagaMiddleware from "redux-saga";
-import { composeWithDevTools } from 'redux-devtools-extension';
-
+//import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from "./root.reducer";
 import rootSaga from "./root.saga";
 

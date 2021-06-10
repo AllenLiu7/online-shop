@@ -1,16 +1,15 @@
-import React, { Component } from "react";
-import { Route } from "react-router-dom";
-import { connect } from "react-redux";
-
-import { fetchCollectionsStart } from "../../redux/shop-items/shop-item.actions";
+import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { fetchCollections } from '../../redux/shop-items/shop-item.reducer';
 import {
   selectIsCollectionFetching,
   selectIsCollectionsLoaded,
-} from "../../redux/shop-items/shop-item.selectors";
+} from '../../redux/shop-items/shop-item.selectors';
 
-import CollectionPage from "../collection-page/collection-page.component";
-import CollectionOverview from "../../components/collection-overview/collection-overview.component";
-import WithSpinner from "../../components/with-spinner/with-spinner.component";
+import CollectionPage from '../collection-page/collection-page.component';
+import CollectionOverview from '../../components/collection-overview/collection-overview.component';
+import WithSpinner from '../../components/with-spinner/with-spinner.component';
 
 const CollectionsOverviewWithSpinner = WithSpinner(CollectionOverview);
 const CollectionPageWithSpinner = WithSpinner(CollectionPage);
@@ -21,14 +20,14 @@ class ShopPage extends Component {
   // if the data(object) exsist, we skip the spinner.
 
   componentDidMount() {
-    this.props.fetchCollectionsStart();
+    this.props.fetchCollections();
   }
 
   render() {
     const { match, selectIsCollectionsLoaded } = this.props;
 
     return (
-      <div className="shop-page">
+      <div className='shop-page'>
         <Route
           exact
           path={`${match.path}`}
@@ -57,7 +56,7 @@ class ShopPage extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchCollectionsStart: () => dispatch(fetchCollectionsStart()),
+  fetchCollections: () => dispatch(fetchCollections()),
 });
 
 const mapStateToProps = (state) => ({
